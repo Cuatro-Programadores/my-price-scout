@@ -49,12 +49,9 @@ class Product:
 
         return f"Specific product on {website} not found."
 
-<<<<<<< HEAD
+
     def change_url_for_specific_product(self, specific_product, website,
                                         specific_product2):
-=======
-    def change_url_for_specific_product(self, specific_product, website, url):
->>>>>>> 7d103705738205cf6ac5cdcde436d20e6ab2cb05
         """This function allows a user to change the link to a product
         Arguments:
             self: specific instance of the Product class
@@ -64,14 +61,9 @@ class Product:
             'amazon,' 'target,' or 'walmart'.
         Return:
             string: Confirmation that the method worked."""
-<<<<<<< HEAD
         self.remove_old_specific_product(website, specific_product.url)
         print("Specific Product", specific_product2)
         self.add_new_specific_product(specific_product2)
-=======
-        self.remove_old_specific_product(website, url)
-        self.add_new_specific_product(specific_product)
->>>>>>> 7d103705738205cf6ac5cdcde436d20e6ab2cb05
 
         return f"Specific product link has been updated."
 
