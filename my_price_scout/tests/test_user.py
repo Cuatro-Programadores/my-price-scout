@@ -2,6 +2,8 @@ import pytest
 
 from files.user import User
 
+def test_exists():
+    assert User
 
 def test_get_item(mock_item_1, mock_user):
     mock_user.watchlist.append(mock_item_1)

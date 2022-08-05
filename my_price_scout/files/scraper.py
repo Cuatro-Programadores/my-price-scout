@@ -77,8 +77,8 @@ class Scraper:
             print(float(actual_price[0]))
             return (float(actual_price[0]))
 
-    # def scrape_walmart(self, url):
-
+    def scrape_walmart(self, url):
+        print("Walmart Scraped!")
     #     URL = url
 
 
@@ -107,37 +107,38 @@ class Scraper:
     #         print(float(actual_price[0]))
     #         return (float(actual_price[0]))
 
-    def scrape_bestbuy(self, url):
+    # def scrape_bestbuy(self, url):
 
-       # Selenium
-        URL = url
+    #    # Selenium
+    #     URL = url
 
-        options = Options()
-        options.add_argument("start-maximized")
-        driver = webdriver.Chrome(service=Service(
-            ChromeDriverManager().install()), options=options)
-        driver.get(URL)
-        page = driver.page_source
-        driver.close()
+    #     options = Options()
+    #     options.add_argument("start-maximized")
+    #     driver = webdriver.Chrome(service=Service(
+    #         ChromeDriverManager().install()), options=options)
+    #     driver.get(URL)
+    #     page = driver.page_source
+    #     driver.close()
 
-        finds = re.findall(
-            r'currentPrice\\"\:\d+(?:\.\d+)?', page)
+    #     finds = re.findall(
+    #         r'currentPrice\\"\:\d+(?:\.\d+)?', page)
 
-        item_found = []
+    #     item_found = []
 
-        for find in finds:
-            item_found.append(find)
+    #     for find in finds:
+    #         item_found.append(find)
 
-        if item_found is None:
-            actual_price = "Price not available"
-            return actual_price
-        else:
-            actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
-            print(float(actual_price[0]))
-            return (float(actual_price[0]))
+    #     if item_found is None:
+    #         actual_price = "Price not available"
+    #         return actual_price
+    #     else:
+    #         actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
+    #         print(float(actual_price[0]))
+    #         return (float(actual_price[0]))
 
 
 if __name__ == '__main__':
+    pass
 
     # Scraper.scrape_amazon(
     #     'https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1')
