@@ -151,6 +151,7 @@ class App_Logic:
 
         # Adjust price etc should show the current value before asking the user to change things.
 
+
     def menu_view_product_info(self):
         print("View Product Info")
 
@@ -235,6 +236,7 @@ class App_Logic:
 
         self.product.add_new_specific_product(self.specific_product)
 
+
     def menu_remove_product_links(self):
         print("Remove Product Links")
 
@@ -248,9 +250,10 @@ class App_Logic:
         website, url = self.user_inputs.capture_website()
 
         self.product = self.user.get_item(name)
+        self.save_user()
 
         self.product.remove_old_specific_product(website, url)
-        self.save_user()
+
 
     def change_product_links(self):
         print("Change a Product Link")
@@ -263,14 +266,14 @@ class App_Logic:
 
         self.product = self.user.get_item(name)
 
+
         print("Which website's link would you like to remove? Copy and paste the website and link that is currently being tracked from above.")
         website, url = self.user_inputs.capture_website()
 
         self.specific_product = self.add_specific_product()
 
-        self.product.change_url_for_specific_product(
-            self.specific_product, website, url)
-        self.save_user()
+        self.product.change_url_for_specific_product(self.specific_product,
+                                                     website, url)
 
     def menu_toggle_product_notifications(self):
         print("Toggle Product Notifications")
@@ -309,6 +312,8 @@ class App_Logic:
         print(self.user)
 
         print("This change has been captured")
+
+
 
     def keyboard_quit(self, message):
         sys.exit(message)
