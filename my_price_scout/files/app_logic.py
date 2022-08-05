@@ -153,9 +153,9 @@ class App_Logic:
 
     def menu_view_product_info(self):
         print("View Product Info")
-
+        self.get_user(self.user.email)
         print(self.user)
-        product_object_list = self.user.get_watchlist()
+        # product_object_list = self.user.get_watchlist()
 
     def menu_input_new_product(self):
         """Creating a new Product Object"""
@@ -175,9 +175,9 @@ class App_Logic:
             watchlist.append(self.add_specific_product())
 
         # self.product = Product(name, strike_price, notifications, watchlist)
-        self.product = Product(name, strike_price, watchlist)
+        new_product = Product(name, strike_price, watchlist)
 
-        self.user.add_item(self.product)
+        self.user.add_item(new_product)
 
         self.save_user()
 
@@ -214,6 +214,7 @@ class App_Logic:
         name = self.user_inputs.capture_product_name()
 
         self.user.remove_item(name)
+        self.save_user()
         # Getting an error -  name 'product_name' is not defined. Error between fetching from user and product classes.
 
         print(f"{name} has been removed from tracking")
@@ -278,32 +279,10 @@ class App_Logic:
         self.menu_view_product_info()
         print("You are changing the notification tracking for a product")
 
-        old_name = self.user_inputs.capture_product_name()
+        item_name = self.user_inputs.capture_product_name()
 
-        # print(old_name)
-
-        print(self.user.get_item(old_name))
-
-        # Pineapple is the name of the temporary product object that we are changing
-        pineapple = self.user.get_item(old_name)
-
-        # print(pineapple)
-        # print(pineapple.is_product_being_tracked)
-        # print(f'pineapple is: ', type(pineapple))
-
-        notification = self.user_inputs.capture_notification()
-
-        name = pineapple.product_name
-        strike_price = pineapple.target_price
-        watchlist = pineapple.specific_product_list
-
-        # We need to delete the current product from the user and replace it with this product that we rebuilt
-        self.product = Product(name, strike_price, watchlist)
-        self.product.is_product_being_tracked = notification
-
-        self.user.remove_item(old_name)
-        self.user.add_item(self.product)
-
+        selected_item = self.user.get_item(item_name)
+        selected_item.toggle_notifications()
         self.save_user()
 
         print(self.user)

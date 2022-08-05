@@ -1,9 +1,9 @@
 
 class Product:
-    def __init__(self, product_name, target_price,
+    def __init__(self, product_name, target_price, is_product_being_tracked=True,
                  specific_product_list=None):
         self.product_name = product_name
-        self.is_product_being_tracked = True
+        self.is_product_being_tracked = is_product_being_tracked
         self.specific_product_list = specific_product_list if specific_product_list else []
         self.target_price = target_price
 
@@ -63,6 +63,9 @@ class Product:
         self.add_new_specific_product(specific_product)
 
         return f"Specific product link has been updated."
+
+    def toggle_notifications(self):
+        self.is_product_being_tracked = not self.is_product_being_tracked
 
     # def product_url_count(self):
     #     """
