@@ -8,18 +8,18 @@ class Product:
         self.target_price = target_price
 
     def __repr__(self):
-        return f"\nProduct Information\n  " \
+        return f"\n\033[1;32mProduct Information \033[0;37m\n  " \
                f"Product Name: {self.product_name}\n  " \
                f"Target Price: ${self.target_price}\n  " \
                f"Notifications: {self.is_product_being_tracked}\n  " \
-               f"Specific Product: {self.specific_product_list}"
+               f"{self.specific_product_list}"
 
     def __str__(self):
         return f"\nProduct Information\n  " \
                f"Product Name: {self.product_name}\n  " \
                f"Target Price: ${self.target_price}\n  " \
                f"Notifications: {self.is_product_being_tracked}\n  " \
-               f"Specific Product: {self.specific_product_list}"
+               f"{self.specific_product_list}"
 
     def add_new_specific_product(self, specific_product):
         """

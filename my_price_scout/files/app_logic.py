@@ -31,7 +31,7 @@
 # Handle Error Message to User before breaking
 # Product name not saving in user
 
-
+import os
 import sys
 from ioutils import IOUtils
 from dbutils import DBUtils
@@ -57,7 +57,7 @@ class App_Logic:
 
     def start(self):
         """This method displays the original user welcome and introduces them to how to quit. THis is where the user interface lives and calls functions to handle the inputs and route the user."""
-
+        self.title()
         print("Welcome to My Price Scout where you can track product pricing from Amazon, Walmart, and Target!\nPress q to quit at any time")
 
         self.get_or_create_new_user()
@@ -75,6 +75,7 @@ class App_Logic:
         else:
             self.get_user(email)
 
+            print("Welcome back!")
             # print(self.user)
 
     def create_user(self, email):
@@ -108,8 +109,6 @@ class App_Logic:
             return None
 
         else:
-            print("Welcome back!")
-
             papaya = self.database.get_user(email)
 
             self.user = papaya
@@ -152,7 +151,7 @@ class App_Logic:
         # Adjust price etc should show the current value before asking the user to change things.
 
     def menu_view_product_info(self):
-        print("View Product Info")
+        print("\n\033[1;32mView Product Info \033[0;37m")
         self.get_user(self.user.email)
         print(self.user)
         # product_object_list = self.user.get_watchlist()
@@ -293,6 +292,15 @@ class App_Logic:
     def keyboard_quit(self, message):
         sys.exit(message)
 
+def title(self):
+        message = """\033[1;32m
+8b    d8 Yb  dP     88""Yb 88""Yb 88  dP""b8 888888     .dP"Y8  dP""b8  dP"Yb  88   88 888888 d8b 
+88b  d88  YbdP      88__dP 88__dP 88 dP   `" 88__       `Ybo." dP   `" dP   Yb 88   88   88   Y8P 
+88YbdP88   8P       88'''  88"Yb  88 Yb      88""       o.`Y8b Yb      Yb   dP Y8   8P   88   `"' 
+88 YY 88  dP        88     88  Yb 88  YboodP 888888     8bodP'  YboodP  YbodP  `YbodP'   88   (8) 
+\033[0;37m"""
+        print (message)
+
 
 if __name__ == "__main__":
     try:
@@ -300,4 +308,5 @@ if __name__ == "__main__":
         new_app.start()
 
     except KeyboardInterrupt:
+        os.system('clear')
         new_app.keyboard_quit('You have pressed CTRL-C so Goodbye!')

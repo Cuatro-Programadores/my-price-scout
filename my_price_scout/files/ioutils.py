@@ -13,7 +13,7 @@
 
 # Hitting enter should be quit on io
 
-
+import os
 import sys
 import re
 # Need to review with the team quit exception - there has to be a dry way to write it.
@@ -26,6 +26,7 @@ class IOUtils:
         pass
 
     def quit_app(self):
+        os.system('clear')
         print(f"Thanks checking in, see you next time!")
         sys.exit(1)
 
