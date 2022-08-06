@@ -9,7 +9,13 @@ class Scraper:
         self.url = url
 
     def scrape_amazon(self, url):
+        """
+        Arguments:
+            url
 
+        Returns:
+            actual price or 999999
+        """
         headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36", "Accept-Encoding": "gzip, deflate",
                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT": "1", "Connection": "close", "Upgrade-Insecure-Requests": "1"}
 
@@ -35,20 +41,15 @@ class Scraper:
             return 999999
 
     def scrape_target(self, url):
+        """
+        Arguments:
+            url
+
+        Returns:
+            actual price or 999999
+        """
 
         page = requests.get(url)
-
-        # try:
-        #     page = requests.get(URL, timeout=3)
-        #     page.raise_for_status()
-        # except requests.exceptions.HTTPError as errh:
-        #     print("Http Error:", errh)
-        # except requests.exceptions.ConnectionError as errc:
-        #     print("Error Connecting:", errc)
-        # except requests.exceptions.Timeout as errt:
-        #     print("Timeout Error:", errt)
-        # except requests.exceptions.RequestException as err:
-        #     print("OOps: Something Else", err)
 
         soup1 = BeautifulSoup(page.content, "html.parser")
 
@@ -67,66 +68,7 @@ class Scraper:
         else:
             actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
             print(float(actual_price[0]))
-            return (float(actual_price[0]))
-
-    # WORK IN PROGRESS
-
-    # def scrape_walmart(self, url):
-
-    #     URL = url
-
-    #     options = Options()
-    #     options.add_argument("start-maximized")
-    #     driver = webdriver.Chrome(service=Service(
-    #         ChromeDriverManager().install()), options=options)
-    #     driver.get(URL)
-    #     page = driver.page_source
-    #     driver.close()
-
-    #     finds = re.findall(
-    #         r'submapType\"\:null},\"currentPrice\"\:{\"price\"\:\d+(?:\.\d+)?', page)
-
-    #     item_found = []
-
-    #     for find in finds:
-    #         item_found.append(find)
-
-    #     if item_found is None:
-    #         actual_price = "Price not available"
-    #         return actual_price
-    #     else:
-    #         actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
-    #         print(float(actual_price[0]))
-    #         return (float(actual_price[0]))
-
-    # def scrape_bestbuy(self, url):
-
-    #    # Selenium
-    #     URL = url
-
-    #     options = Options()
-    #     options.add_argument("start-maximized")
-    #     driver = webdriver.Chrome(service=Service(
-    #         ChromeDriverManager().install()), options=options)
-    #     driver.get(URL)
-    #     page = driver.page_source
-    #     driver.close()
-
-    #     finds = re.findall(
-    #         r'currentPrice\\"\:\d+(?:\.\d+)?', page)
-
-    #     item_found = []
-
-    #     for find in finds:
-    #         item_found.append(find)
-
-    #     if item_found is None:
-    #         actual_price = "Price not available"
-    #         return actual_price
-    #     else:
-    #         actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
-    #         print(float(actual_price[0]))
-    #         return (float(actual_price[0]))
+            return float(actual_price[0])
 
 
 if __name__ == '__main__':

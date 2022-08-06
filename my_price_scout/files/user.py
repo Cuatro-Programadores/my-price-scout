@@ -23,21 +23,54 @@ class User:
                f"{self.watchlist}"
 
     def get_item(self, item_name):
+        """
+
+        Args:
+            item_name ():
+
+        Returns:
+            item
+        """
         for item in self.watchlist:
             if item.product_name == item_name:
 
                 return item
 
     def add_item(self, item):
+        """
+
+        Args:
+            item ():
+
+        Returns:
+            None
+        """
         self.watchlist.append(item)
 
     def remove_item(self, item_name):
+        """
+
+        Args:
+            item_name ():
+
+        Returns:
+            None
+        """
 
         for item in self.watchlist:
             if item.product_name == item_name:
                 self.watchlist.remove(item)
 
     def replace_item(self, old_item_name, item):
+        """
+
+        Args:
+            old_item_name ():
+            item ():
+
+        Returns:
+            None
+        """
         new_watchlist = []
 
         for old_item in self.watchlist:
@@ -49,5 +82,10 @@ class User:
         self.watchlist = new_watchlist
 
     def get_watchlist(self):
+        """
+
+        Returns:
+            watchlist
+        """
 
         return self.watchlist

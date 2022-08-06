@@ -1,22 +1,6 @@
-# IO Utils Class Project Framework
-
-#   * Capture email: inputs - email, outputs - validated email
-#   * Capture number: inputs - phone, outputs - validated phone
-#   * Capture carrier: inputs - carrier, validated carrier
-#   * Capture product_name: inputs - user product nickname, validated carrier
-#   * Capture website: inputs - website name from list
-#   * Capture url: inputs - url, validated url(currently there is barely validation) --> (changed)Also pass to the correct scraper function- This will actually happen in App!
-#   * Capture strike_price: inputs - integer
-#   * Capture notification: inputs Boolean or user input returns Boolean or none
-#   * Capture menu_nav: inputs - number from 1-6 based on where the user would like to go
-
-
-# Hitting enter should be quit on io
-
 import os
 import sys
 import re
-# Need to review with the team quit exception - there has to be a dry way to write it.
 
 
 class IOUtils:
@@ -26,11 +10,22 @@ class IOUtils:
         pass
 
     def quit_app(self):
+        """
+        Clears the entire screen and then quits the entire program.
+        """
         os.system('clear')
         print(f"Thanks checking in, see you next time!")
         sys.exit(1)
 
     def check(self, value):
+        """
+
+        Args:
+            value
+
+        Returns:
+            value or none
+        """
         print(f"{value} right? Type y or n")
         verify = input("> ").lower()
         if verify == "q":
@@ -53,12 +48,11 @@ class IOUtils:
 
         regex_email = r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'
 
-        if (re.fullmatch(regex_email, email)):
+        if re.fullmatch(regex_email, email):
             email = self.check(email)
             if email is None:
                 self.capture_email()
             else:
-                # print(email)
                 return email
 
         else:
@@ -78,12 +72,11 @@ class IOUtils:
 
         regex_number = r'^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$'
 
-        if (re.fullmatch(regex_number, number)):
+        if re.fullmatch(regex_number, number):
             number = self.check(number)
             if number is None:
                 self.capture_number()
             else:
-                # print(number)
                 return number
 
         else:
@@ -117,7 +110,6 @@ class IOUtils:
                 return phone_plan
 
             else:
-                # print(phone_plan)
                 return phone_plan
         else:
             print("Invalid phone_plan\nPlease try to input your phone_plan again")
@@ -138,18 +130,15 @@ class IOUtils:
         if name is None:
             self.capture_product_name()
         else:
-            # print(name)
             return name
-
-        # NEED TO VALIDATE WHETHER THE NAME IS IN THE USER CLASS IN THE APP LOGIC!!!!
 
     def capture_website(self):
         """Asks the user whether they would input a link to Amazon, Target, or Walmart. Also collects the link and returns it together with the site name in lowercase."""
 
         print("Is the product URL from Amazon, Target or Walmart?")
 
-        store = input("> ").title()
         # This makes the store name Title case like Amazon, Target, or Walmart instead of being fully lowercase.
+        store = input("> ").title()
 
         if store == "q":
             self.quit_app()
@@ -158,7 +147,7 @@ class IOUtils:
 
         if store in list_of_sites:
             URL = self.capture_url(store)
-            return (store, URL)
+            return store, URL
 
         else:
             print("Invalid store\nPlease try to input your store again")
@@ -167,7 +156,6 @@ class IOUtils:
 
     def capture_url(self, store_name):
         """Captures a URL for specific_product"""
-        # Need to talk with the team about this since it is NOT validating the URL Currently past making sure than the link includes the name of the site in question.
 
         print(f"Please input the URL for the item from {store_name}")
 
@@ -181,7 +169,6 @@ class IOUtils:
             if url is None:
                 self.capture_url(store_name)
             else:
-                # print(url)
                 return url
 
         else:
@@ -201,7 +188,7 @@ class IOUtils:
 
         regex_number = r'^\s*[0-9]{1,10}\s*$'
 
-        if (re.fullmatch(regex_number, price)):
+        if re.fullmatch(regex_number, price):
             price = self.check(price)
             if price is None:
                 self.capture_strike_price()
@@ -216,7 +203,6 @@ class IOUtils:
 
     def capture_notification(self, override=None):
         """This is the boolean that activates the price tracking notifications. The optional input override is for the tracker to be able to turn off the notification when it sends out an alert"""
-        # This needs to be reviewed for the override section
 
         notification = None
 
@@ -269,15 +255,16 @@ Press q to quit at any time
 
         print(menu)
 
+        # This makes the nav name Title case like Amazon, Target, or Walmart
+        # instead of being fully lowercase.
         nav = input("> ")
-        # This makes the nav name Title case like Amazon, Target, or Walmart instead of being fully lowercase.
 
         if nav == "q":
             self.quit_app()
 
         regex_menu_number = r'^([1-7])$'
 
-        if (re.fullmatch(regex_menu_number, nav)):
+        if re.fullmatch(regex_menu_number, nav):
             return int(nav)
 
         else:
@@ -297,7 +284,7 @@ Press q to quit at any time
 
         regex_menu_number = r'^([1-3])$'
 
-        if (re.fullmatch(regex_menu_number, count)):
+        if re.fullmatch(regex_menu_number, count):
             return int(count)
 
         else:
