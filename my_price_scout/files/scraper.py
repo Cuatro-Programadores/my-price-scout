@@ -1,9 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.chrome.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
 import re
 
 
@@ -40,9 +36,19 @@ class Scraper:
 
     def scrape_target(self, url):
 
-        URL = url
+        page = requests.get(url)
 
-        page = requests.get(URL)
+        # try:
+        #     page = requests.get(URL, timeout=3)
+        #     page.raise_for_status()
+        # except requests.exceptions.HTTPError as errh:
+        #     print("Http Error:", errh)
+        # except requests.exceptions.ConnectionError as errc:
+        #     print("Error Connecting:", errc)
+        # except requests.exceptions.Timeout as errt:
+        #     print("Timeout Error:", errt)
+        # except requests.exceptions.RequestException as err:
+        #     print("OOps: Something Else", err)
 
         soup1 = BeautifulSoup(page.content, "html.parser")
 
@@ -62,6 +68,8 @@ class Scraper:
             actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
             print(float(actual_price[0]))
             return (float(actual_price[0]))
+
+    # WORK IN PROGRESS
 
     # def scrape_walmart(self, url):
 
@@ -91,45 +99,36 @@ class Scraper:
     #         print(float(actual_price[0]))
     #         return (float(actual_price[0]))
 
+    # def scrape_bestbuy(self, url):
 
-if __name__ == "__main__":
+    #    # Selenium
+    #     URL = url
 
-    # Scraper.scrape_amazon(
-    #     'https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1')
-    # # Scraper.scrape_amazon(
-    # #     'https://www.amazon.com/dp/B07VHZ41L8?ref_=nav_em__k_ods_ha_ta_0_2_4_6')
-    # # Scraper.scrape_amazon(
-    # #     'https://www.amazon.com/dp/B08F6FYN6B?ref_=nav_em__k_ods_tab_ta_pls_0_2_5_6')
-    # # Scraper.scrape_amazon(
-    # #     'https://www.amazon.com/gp/product/B0B1352TDK?ie=UTF8&keywords=jewelry&sprefix=je%2Cluxury%2C151&sr=1-1&crid=2KWVNYXW3SHUW&qid=1659393999&ref_=sr_1_1_lx_bd')
-    # # Scraper.scrape_amazon(
-    # #     'https://www.amazon.com/Natural-Current-NC13KWDYIKIT-Floating-Installation/dp/B00R34C7GG/ref=sr_1_1?crid=2WCGEAFZOK0Z6&keywords=solar+panels&qid=1659395715&sprefix=solar+pa%2Caps%2C148&sr=8-1')
-    # # Scraper.scrape_amazon(
-    # #     'https://www.amazon.com/Napkins-Lucheon-Beverage-Guest-BIrthday/dp/B00JBG31KK/ref=sr_1_2?crid=258BO8L7ZNNWE&keywords=napkins&qid=1659396596&sprefix=napkins%2Caps%2C186&sr=8-2')
+    #     options = Options()
+    #     options.add_argument("start-maximized")
+    #     driver = webdriver.Chrome(service=Service(
+    #         ChromeDriverManager().install()), options=options)
+    #     driver.get(URL)
+    #     page = driver.page_source
+    #     driver.close()
 
-    # Scraper.scrape_target(
-    #     'https://www.target.com/p/hisense-55-34-class-a6g-series-4k-uhd-android-smart-tv-55a6g/-/A-82802681#lnk=sametab')
-    # # Scraper.scrape_target(
-    # #     '``')
-    # # Scraper.scrape_target(
-    # #     'https://www.target.com/p/goumikids-thermal-organic-cotton-pants/-/A-85165008?preselect=85165038#lnk=sametab')
-    # # Scraper.scrape_target(
-    # #     'https://www.target.com/p/pompeii3-2ct-huge-diamond-heart-pendant-14k-white-gold/-/A-87091390#lnk=sametab')
-    # # Scraper.scrape_target(
-    # #     'https://www.target.com/p/newair-27-built-in-160-bottle-dual-zone-compressor-wine-fridge-in-stainless-steel-quiet-operation-with-smooth-rolling-shelves/-/A-86737742#lnk=sametab')
-    # # Scraper.scrape_target(
-    # #     'https://www.target.com/p/disposable-paper-napkins-230ct-smartly-8482/-/A-75557241#lnk=sametab')
+    #     finds = re.findall(
+    #         r'currentPrice\\"\:\d+(?:\.\d+)?', page)
 
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/Rayovac-High-Energy-AAA-Batteries-60-Pack-Triple-A-Batteries/45598335')
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/LG-55-Class-4K-UHD-OLED-Web-OS-Smart-TV-with-Dolby-Vision-A2-Series-OLED55A2PUA/218195189')
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/Poppy-Women-s-Vegan-Leather-Quilted-Crossbady-Shoulder-Purse-Drawstring-Bucket-Bag-Messenger-Bag/401837777?athbdg=L1900')
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/Loloi-II-Wynter-WYN-02-Auburn-Multi-Oriental-Area-Rug-8-6-x-11-6/178864229')
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/Pompeii3-1-1-10ct-Cushion-Halo-Solitaire-Diamond-Engagement-Wedding-Ring-Set-White-Gold/997500370?athbdg=L1700')
-    # Scraper.scrape_walmart(
-    #     'https://www.walmart.com/ip/Clorox-Toilet-Bowl-Cleaner-with-Bleach-Rain-Clean-24-oz/12443821')
+    #     item_found = []
+
+    #     for find in finds:
+    #         item_found.append(find)
+
+    #     if item_found is None:
+    #         actual_price = "Price not available"
+    #         return actual_price
+    #     else:
+    #         actual_price = re.findall(r'\d+(?:\.\d+)?', item_found[0])
+    #         print(float(actual_price[0]))
+    #         return (float(actual_price[0]))
+
+
+if __name__ == '__main__':
+
     pass
