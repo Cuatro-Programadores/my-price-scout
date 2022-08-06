@@ -35,4 +35,10 @@ Email Validation: <https://www.geeksforgeeks.org/check-if-email-address-valid-or
 Amazon Scraping: <https://www.youtube.com/watch?v=DHqAQxgleoc&ab_channel=JieJenn>  
 Amazon Scraping: <https://www.youtube.com/watch?v=Bg9r_yLk7VY&ab_channel=DevEd>  
 Amazon Scraping: <https://github.com/ArkadiyReydman/Amazon-Walmart-Etsy-Price-Tracker/blob/master/price_tracker.py>  
+Email Regex Validation: <https://stackabuse.com/python-validate-email-address-with-regular-expressions-regex/>
+Email Number Validation: <https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number>
+Nested Dictionaries: <https://www.programiz.com/python-programming/nested-dictionary>
+Function Str's and Repr's: <https://www.pythontutorial.net/python-oop/python-__repr__/>
+My Price Scout Terminal Image: <https://patorjk.com/software/taag/#p=display&f=Avatar&t=Type%20Something%20>
+Terminal Font Colouring: <https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal>
 

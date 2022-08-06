@@ -1,9 +1,14 @@
-Class inputs/outputs:
-* IO Utils
-  * Capture email: inputs - email, outputs - validated email 
-  * Capture phone: inputs - phone, outputs - validated phone
-  * Capture carrier: inputs - carrier, validated carrier
-  * Capture url: inputs - url, validated url
+# Class inputs/outputs:
+
+* Capture email: inputs - email, outputs - validated email 
+* Capture number: inputs - phone, outputs - validated phone
+* Capture carrier: inputs - carrier, validated carrier
+* Capture product_name: inputs - user product nickname, validated carrier
+* Capture website: inputs - website name from list 
+* Capture url: inputs - url, validated url(currently there is barely validation) --> (changed)Also pass to the correct scraper function- This will actually happen in App!
+* Capture strike_price: inputs - integer 
+* Capture notification: inputs Boolean or user input returns Boolean or none
+* Capture menu_nav: inputs - number from 1-6 based on where the user would like to go
 
 
 * App
@@ -11,15 +16,10 @@ Class inputs/outputs:
     * helper methods: get_user, create_user, save_user
     * save_user will parse the User instance into key values and save to Db 
       using Database Utils
-  * menu: inputs - none, outputs - screen prompts or return information
+  * Menu: inputs - none, outputs - screen prompts or return information
     * helpers: IO Utils, User, and Item
-  * remove_url: calls the remove_url method in Item
-    * inputs - website name (i.e., Amazon), outputs - confirmation 
-      string
-    * if removing the only link, then prompt user for new link or to 
-      remove item
-  * manage_user_items: logic for when a user has items to add, remove, or 
-    edit items
+    * manage_user_items: logic for when a user has items to add, remove, or 
+      edit items
 
 
 * User
@@ -29,18 +29,18 @@ Class inputs/outputs:
   * edit_item: inputs - product name, output - none
 
 
-* Item - This will act upon the Link class to add, remove, and change url(s).
-  * add_url: inputs - url(s), output - confirmation string  (may need to 
+* Product - This will act upon the Link class to add, remove, and change url(s).
+  * add_specific_product: inputs - url(s), output - confirmation string  (may need to 
     break this out to individual links)
   * add_name: inputs - name, output - confirmation string
   * add_target_price: - inputs - int, output - confirmation string
-  * item_url_count: inputs - name, output - int
-  * remove_url: inputs - website name (i.e., Amazon), output - confirmation 
+  * product_url_count: inputs - name, output - int
+  * remove_url: inputs - Link aka specific product, output - confirmation 
     string
   * get_summary: inputs - name, output - all data for the item (representation)
   * change_url: inputs - website name, output - confirmation, calls 
     remove_url followed by add_url
-  * is_item_being_tracked: inputs - boolean, output - string about tracking, 
+  * is_product_being_tracked: inputs - boolean, output - string about tracking, 
     returns boolean (this should toggle tracking)
 
 
@@ -61,7 +61,7 @@ Class inputs/outputs:
   * send_notification: inputs - price, email, outputs - text notification
 
 
-* Link
+* Specific_Product
   * website is the name (i.e., Amazon, Target, Walmart)
   * url is the specific webpage the user puts in
   * actual_price is the value found on the link by the Scraper
