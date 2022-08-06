@@ -39,5 +39,3 @@ Email Regex Validation: <https://stackabuse.com/python-validate-email-address-wi
 Email Number Validation: <https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number>
 Nested Dictionaries: <https://www.programiz.com/python-programming/nested-dictionary>
 Function Str's and Repr's: <https://www.pythontutorial.net/python-oop/python-__repr__/>
-
-
