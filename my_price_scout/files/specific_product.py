@@ -8,7 +8,7 @@ class Specific_Product():
         self.price = price
 
     def __repr__(self):
-        return f'\nProduct Page\n  ' \
+        return f'\n\033[1;32mProduct Page(s) \033[0;37m\n  ' \
                f'Website: {self.website}\n  ' \
                f'Current Price: ${self.price}\n  ' \
                f'URL: {self.url}'
