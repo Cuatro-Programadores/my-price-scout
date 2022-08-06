@@ -292,7 +292,7 @@ class App_Logic:
     def keyboard_quit(self, message):
         sys.exit(message)
 
-def title(self):
+    def title(self):
         message = """\033[1;32m
 8b    d8 Yb  dP     88""Yb 88""Yb 88  dP""b8 888888     .dP"Y8  dP""b8  dP"Yb  88   88 888888 d8b 
 88b  d88  YbdP      88__dP 88__dP 88 dP   `" 88__       `Ybo." dP   `" dP   Yb 88   88   88   Y8P 
@@ -305,6 +305,7 @@ def title(self):
 if __name__ == "__main__":
     try:
         new_app = App_Logic()
+        os.system('clear')
         new_app.start()
 
     except KeyboardInterrupt:
