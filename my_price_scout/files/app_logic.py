@@ -1,36 +1,3 @@
-# Project Framework
-#   * get_or_create_user: inputs - email, phone, carrier, outputs - User instance
-#     * helper methods: get_user, create_user, save_user
-#     * save_user will parse the User instance into key values and save to Db
-#       using Database Utils
-#   * start: inputs - none, outputs - screen prompts or return information
-#     * helpers: IO Utils, User, and Item
-#   * menu: Routing the user through the options they have available. inputs - None outputs - function calls based on the users selections.(Different options for where they would like to go and some sort of back function)
-#
-# * remove_url: calls the remove_url method in Item
-#     * inputs - website name (i.e., Amazon), outputs - confirmation
-#       string
-#     * if removing the only link, then prompt user for new link or to
-#       remove item
-#   * manage_user_items: logic for when a user has items to add, remove, or
-#     edit items
-
-# To Do :
-# create a menu for the user with the options for the things they can change. Create methods that call the other class' functions that hold those methods
-# Create the board that gives the other classes the info they need/build out the user with the products and build out the products with the specific products
-
-# Need the team - Somewhere we need to add the sleep function that calls the scraper every 10 minutes. Not sure how that gets integrated with the serverless portion.
-# View Tracked Products and View Products and Pricing have been combined into view product info since that would be returning all of the product objects. This only works if we move get summary to user
-# Looks like there would need to be another edit product section to incorporate functions from temp_product and_name, add_target_price. These functions may not be necessary since we are passing this to the product to start with.
-
-
-# To Do List
-# Hitting enter from io utils - especially in input carrier.
-# ioutils testing
-# Toggle Notifications not saving in User
-# Handle Error Message to User before breaking
-# Product name not saving in user
-
 import os
 import sys
 from ioutils import IOUtils
@@ -39,38 +6,38 @@ from user import User
 from product import Product
 from specific_product import Specific_Product
 from scraper import Scraper
-from temptracker import Tracker
-
-# The scraper function will return a string if the url is wrong or something but an integer if the scraper work - need to update ioutils
 
 
-class App_Logic:
+class AppLogic:
     def __init__(self) -> None:
         self.user_inputs = IOUtils()
         self.database = DBUtils()
         self.scraper = Scraper()
-        self.tracker = Tracker()
         self.user = None
         self.user_data = {}
         self.product = None
         self.specific_product = None
 
     def start(self):
-        """This method displays the original user welcome and introduces them to how to quit. THis is where the user interface lives and calls functions to handle the inputs and route the user."""
+        """This method displays the original user welcome and introduces 
+         them to how to quit. THis is where the user interface lives and 
+          calls functions to handle the inputs and route the user."""
         self.title()
-        print("Welcome to My Price Scout where you can track product pricing from Amazon, Walmart, and Target!\nPress q to quit at any time")
+        print("Welcome to My Price Scout where you can track product pricing "
+              "from Amazon, Walmart, and Target!\nPress q to quit at any time") 
 
         self.get_or_create_new_user()
 
         self.manage_user_items_menu()
 
     def get_or_create_new_user(self):
-        """Takes in the users email as an input and checks the database for the user. Routes to create a new user or return user information based on Database returned info."""
+        """Takes in the users email as an input and checks the database for 
+        the user. Routes to create a new user or return user information 
+        based on Database returned info. """
 
         email = self.user_inputs.capture_email()
-        # print(email)
 
-        if self.database.get_user(email) == None:
+        if self.database.get_user(email) is None:
             self.create_user(email)
         else:
             self.get_user(email)
@@ -95,15 +62,15 @@ class App_Logic:
         self.save_user()
 
     def save_user(self):
-        """Parse the data from the users input and send it to the DBUtils as an object"""
+        """Parse the data from the users input and send it to the DBUtils as 
+        an object """
 
         self.database.set_user(self.user)
-        # Part of this is voided since we are parsing through the db utils function
 
     def get_user(self, email):
-        """Parse the data from the database and make a new user object.
-        The get_user function from the database sends back a user object fully put together."""
-        # This is where we need to set up the retrieval for the user object - depends on how we input the user information
+        """Parse the data from the database and make a new user object. The 
+        get_user function from the database sends back a user object fully 
+        put together. """
 
         if self.database.get_user(email) is None:
             return None
@@ -114,8 +81,10 @@ class App_Logic:
             self.user = papaya
 
     def manage_user_items_menu(self):
-        # See the example Sergii sent
-
+        """
+        Menu selection for the user to direct the code to each of the
+         program functions.
+        """
         steering = self.user_inputs.capture_menu_nav()
 
         if steering == 1:
@@ -146,34 +115,32 @@ class App_Logic:
             self.menu_toggle_product_notifications()
             self.manage_user_items_menu()
 
-        # There should be some sort of input in these cases for the user to go back without adjusting anything.
-
-        # Adjust price etc should show the current value before asking the user to change things.
-
     def menu_view_product_info(self):
+        """
+        Displays table of users current items and information.
+        """
         print("\n\033[1;32mView Product Info \033[0;37m")
         self.get_user(self.user.email)
         print(self.user)
-        # product_object_list = self.user.get_watchlist()
 
     def menu_input_new_product(self):
         """Creating a new Product Object"""
-        print(
-            "Input A New Product. All new items are automatically tracked for notifications")
+        print("Input A New Product. All new items are automatically tracked "
+              "for notifications")
 
         name = self.user_inputs.capture_product_name()
         strike_price = self.user_inputs.capture_strike_price()
-        # notifications = self.user_inputs.capture_notification()
         watchlist = []
 
         number = self.user_inputs.how_many_links()
-        # print(f"number={number}")
 
         for _ in range(number):
-            # This just calls adds specific products to the watchlist based on how many the user says they would like to add.
+            """
+            This just calls adds specific products to the watchlist based on 
+            how many the user says they would like to add.
+            """
             watchlist.append(self.add_specific_product())
 
-        # self.product = Product(name, strike_price, notifications, watchlist)
         new_product = Product(name, strike_price, watchlist)
 
         self.user.add_item(new_product)
@@ -204,6 +171,9 @@ class App_Logic:
         return self.specific_product
 
     def menu_remove_product(self):
+        """
+        Remove a product of the user's choosing.
+        """
         print("Remove A Product")
 
         print("Here is the list of products you currently have saved:")
@@ -214,11 +184,13 @@ class App_Logic:
 
         self.user.remove_item(name)
         self.save_user()
-        # Getting an error -  name 'product_name' is not defined. Error between fetching from user and product classes.
 
         print(f"{name} has been removed from tracking")
 
     def menu_add_product_links(self):
+        """
+        Add additional links to existing product of user's choice.
+        """
         print("Add Product Links")
 
         print("Here is the list of products you currently have saved:")
@@ -231,12 +203,13 @@ class App_Logic:
 
         self.specific_product = self.add_specific_product()
 
-        # print (self.specific_product)
-
         self.product.add_new_specific_product(self.specific_product)
         self.save_user()
 
     def menu_remove_product_links(self):
+        """
+        Remove link from a product of the user's choosing.
+        """
         print("Remove Product Links")
 
         print("Here is the list of products you currently have saved:")
@@ -245,7 +218,9 @@ class App_Logic:
 
         name = self.user_inputs.capture_product_name()
 
-        print("Which website's link would you like to remove? Copy and paste the website and link that is currently being tracked from above.")
+        print("Which website's link would you like to remove? Copy and paste "
+              "the website and link that is currently being tracked from "
+              "above.")
         website, url = self.user_inputs.capture_website()
 
         self.product = self.user.get_item(name)
@@ -254,6 +229,10 @@ class App_Logic:
         self.save_user()
 
     def change_product_links(self):
+        """
+        Guides a user through removing an existing link for a product and
+        adding a new link for the same product.
+        """
         print("Change a Product Link")
 
         print("Here is the list of products you currently have saved:")
@@ -264,7 +243,9 @@ class App_Logic:
 
         self.product = self.user.get_item(name)
 
-        print("Which website's link would you like to remove? Copy and paste the website and link that is currently being tracked from above.")
+        print("Which website's link would you like to remove? Copy and paste "
+              "the website and link that is currently being tracked from "
+              "above.")
         website, url = self.user_inputs.capture_website()
 
         self.specific_product = self.add_specific_product()
@@ -274,6 +255,10 @@ class App_Logic:
         self.save_user()
 
     def menu_toggle_product_notifications(self):
+        """
+        Allows the user to change whether to receive a notification or not
+        for a given product.
+        """
         print("Toggle Product Notifications")
         print("Here is the list of products you currently have saved:")
         self.menu_view_product_info()
@@ -299,12 +284,12 @@ class App_Logic:
 88YbdP88   8P       88'''  88"Yb  88 Yb      88""       o.`Y8b Yb      Yb   dP Y8   8P   88   `"' 
 88 YY 88  dP        88     88  Yb 88  YboodP 888888     8bodP'  YboodP  YbodP  `YbodP'   88   (8) 
 \033[0;37m"""
-        print (message)
+        print(message)
 
 
 if __name__ == "__main__":
     try:
-        new_app = App_Logic()
+        new_app = AppLogic()
         os.system('clear')
         new_app.start()
 

@@ -31,7 +31,6 @@ def test_add_new_specific_product(specific_product):
 
 def test_remove_old_specific_product(specific_product):
     product = Product("ups", 180)
-    # print(product)
 
     product.remove_old_specific_product("amazon", "https://www.amazon.com/APC-Battery-Protector-BackUPS-BX1500M/dp/B06VY6FXMM?ref_=Oct_DLandingS_D_d1d1e0d6_60&smid=ATVPDKIKX0DER&th=1")
     print(product)
