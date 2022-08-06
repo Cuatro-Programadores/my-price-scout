@@ -31,7 +31,7 @@ class Scraper:
                 print(float(actual_price[0]))
                 return(float(actual_price[0]))
         else:
-            print("999999")
+            print("Item Price could not be found.")
             return 999999
 
     def scrape_target(self, url):
@@ -69,15 +69,14 @@ class Scraper:
             print(float(actual_price[0]))
             return (float(actual_price[0]))
 
-<<<<<<< HEAD
     def scrape_walmart(self, url):
         print("Walmart Scraped!")
-=======
+
     # WORK IN PROGRESS
 
     # def scrape_walmart(self, url):
 
->>>>>>> ada2c31d4d09cf74186465c0307b635d4c6611ee
+
     #     URL = url
 
     #     options = Options()

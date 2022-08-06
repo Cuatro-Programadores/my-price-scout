@@ -8,19 +8,19 @@ class User:
 
     def __repr__(self):
 
-        return f"User Information:\n  " \
+        return f"\n\033[1;32mUser Information: \033[0;37m\n  " \
                f"Email: {self.email}\n  " \
                f"Phone Number: {self.phone_number}\n  " \
                f"Cell Carrier: {self.cell_carrier}\n  " \
-               f"Items: {self.watchlist}"
+               f"{self.watchlist}"
 
     def __str__(self):
 
-        return f"User Information:\n  " \
+        return f"\n\033[1;32mPUser Information: \033[0;37m\n  " \
                f"Email: {self.email}\n  " \
                f"Phone Number: {self.phone_number}\n  " \
                f"Cell Carrier: {self.cell_carrier}\n  " \
-               f"Items: {self.watchlist}"
+               f"{self.watchlist}"
 
     def get_item(self, item_name):
         for item in self.watchlist:
