@@ -280,7 +280,7 @@ Press q to quit at any time
         if nav == "q":
             self.quit_app()
 
-        regex_menu_number = r'^([1-6])$'
+        regex_menu_number = r'^([1-7])$'
         
         if (re.fullmatch(regex_menu_number, nav)):
             return int(nav)
