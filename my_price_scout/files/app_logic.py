@@ -235,6 +235,7 @@ class App_Logic:
         # print (self.specific_product)
 
         self.product.add_new_specific_product(self.specific_product)
+        self.save_user()
 
     def menu_remove_product_links(self):
         print("Remove Product Links")

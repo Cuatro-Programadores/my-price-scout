@@ -1,7 +1,7 @@
 
 class Product:
-    def __init__(self, product_name, target_price, is_product_being_tracked=True,
-                 specific_product_list=None):
+    def __init__(self, product_name, target_price,
+                 specific_product_list=None, is_product_being_tracked=True):
         self.product_name = product_name
         self.is_product_being_tracked = is_product_being_tracked
         self.specific_product_list = specific_product_list if specific_product_list else []
@@ -30,7 +30,8 @@ class Product:
         Return:
             confirmation_string: confirms the specific_product was added.
         """
-
+        print("SPECIFIC PRODUCT LIST", self.specific_product_list)
+        print("SPECIFIC PRODUCT", specific_product)
         self.specific_product_list.append(specific_product)
 
     def remove_old_specific_product(self, website, url):
