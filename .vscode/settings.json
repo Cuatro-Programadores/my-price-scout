@@ -1,7 +1,0 @@
-{
-  "python.testing.pytestArgs": [
-    "my_price_scout"
-  ],
-  "python.testing.unittestEnabled": false,
-  "python.testing.pytestEnabled": true
-}
