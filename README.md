@@ -2,6 +2,9 @@
 
 This app allows you to add desired items from different online retailers to a watchlist and set your desired price. The app will notify you when the item price drops to the desired level via text notification.
 
+# NOTE
+App functionality is currently suspended, please contact the owners if you would like to use/test the app.
+
 ## Authors
 
 Marni Hager, Jae Loney, Pedro Perez, Sergii Otryshko
@@ -12,7 +15,7 @@ Marni Hager, Jae Loney, Pedro Perez, Sergii Otryshko
 
 ## Database Schema
 
-[“User”: {  
+[{ 
 “Email”:”” : String  
  “PhoneNumber”: “” : Integers  
 “PhoneCarrier” : “” : String  
